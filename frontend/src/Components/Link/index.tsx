@@ -1,12 +1,21 @@
 import React, { useEffect, useContext } from "react";
 import { usePlaidLink } from "react-plaid-link";
 import Button from "plaid-threads/Button";
+import axios from "axios";
+import Context from "../../PlaidContext";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext"
 
-import Context from "../../Context";
+interface messageDescription {
 
-const Link = () => {
-  const { linkToken, dispatch } = useContext(Context);
+  description: string;
 
+}
+
+const Link = (props : messageDescription) => {
+  const { linkToken, dispatch, accessToken } = useContext(Context);
+  const history = useHistory();
+  const { addToken } = useAuth()
   const onSuccess = React.useCallback(
     (public_token: string) => {
       // send public_token to server
@@ -30,6 +39,7 @@ const Link = () => {
           return;
         }
         const data = await response.json();
+        
         dispatch({
           type: "SET_STATE",
           state: {
@@ -38,10 +48,13 @@ const Link = () => {
             isItemAccess: true,
           },
         });
+        addToken(data.access_token);
       };
       setToken();
       dispatch({ type: "SET_STATE", state: { linkSuccess: true } });
-      window.history.pushState("", "", "/");
+      //window.history.pushState("", "", "/table");
+      history.push("/")
+
     },
     [dispatch]
   );
@@ -69,7 +82,7 @@ const Link = () => {
 
   return (
     <Button type="button" large onClick={() => open()} disabled={!ready}>
-      Launch Link
+      {props.description}
     </Button>
   );
 };

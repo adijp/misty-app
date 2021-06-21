@@ -4,11 +4,15 @@ import Button from "plaid-threads/Button";
 import InlineLink from "plaid-threads/InlineLink";
 
 import Link from "../Link";
-import Context from "../../Context";
+import Context from "../../PlaidContext/";
 
 import styles from "./index.module.scss";
+interface messageDescription {
 
-const Header = () => {
+  description: string;
+
+}
+const Header = (props : messageDescription) => {
   const {
     itemId,
     accessToken,
@@ -21,11 +25,10 @@ const Header = () => {
 
   return (
     <div className={styles.grid}>
-      <h3 className={styles.title}>Plaid Quickstart</h3>
 
       {!linkSuccess ? (
         <>
-          <h4 className={styles.subtitle}>
+          {/* <h4 className={styles.subtitle}>
             A sample end-to-end integration with Plaid
           </h4>
           <p className={styles.introPar}>
@@ -34,7 +37,7 @@ const Header = () => {
             launch Link - the client-side component that your users will
             interact with in order to link their accounts to Plaid and allow you
             to access their accounts via the Plaid API.
-          </p>
+          </p> */}
           {/* message if backend is not running and there is no link token */}
           {!backend ? (
             <Callout warning>
@@ -66,49 +69,13 @@ const Header = () => {
             </div>
           ) : (
             <div className={styles.linkButton}>
-              <Link />
+              <Link description={props.description}/>
             </div>
           )}
         </>
-      ) : (
-        <>
-          {isItemAccess ? (
-            <h4 className={styles.subtitle}>
-              Congrats! By linking an account, you have created an{" "}
-              <InlineLink
-                href="http://plaid.com/docs/quickstart/glossary/#item"
-                target="_blank"
-              >
-                Item
-              </InlineLink>
-              .
-            </h4>
-          ) : (
-            <h4 className={styles.subtitle}>
-              <Callout warning>
-                Unable to create an item. Please check your backend server
-              </Callout>
-            </h4>
-          )}
-          <div className={styles.itemAccessContainer}>
-            <p className={styles.itemAccessRow}>
-              <span className={styles.idName}>item_id</span>
-              <span className={styles.tokenText}>{itemId}</span>
-            </p>
-
-            <p className={styles.itemAccessRow}>
-              <span className={styles.idName}>access_token</span>
-              <span className={styles.tokenText}>{accessToken}</span>
-            </p>
-          </div>
-          {isItemAccess && (
-            <p className={styles.requests}>
-              Now that you have an access_token, you can make all of the
-              following requests:
-            </p>
-          )}
-        </>
-      )}
+      ) : <div className={styles.linkButton}>
+      <Link description={props.description}/>
+    </div>}
     </div>
   );
 };

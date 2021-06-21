@@ -16,8 +16,10 @@
     "dotenv": "^8.2.0",
     "ejs": "2.5.x",
     "express": "4.16.x",
+    "firebase-admin": "^9.9.0",
     "moment": "2.22.x",
     "nodemon": "^2.0.5",
-    "plaid": "^9.0.0-beta.11"
+    "plaid": "^9.0.0-beta.11",
+    "react-plaid-link": "^3.1.0"
   }
 }
