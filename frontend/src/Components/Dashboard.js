@@ -66,26 +66,6 @@ export default function Dashboard() {
             LinkMessage = "Add another bank"
         } 
     }
-    const [account_list, account_loading, account_error] = useCollection(
-        db.collection("users").doc(currentUser.uid).collection('accounts')
-        ,
-        {
-            snapshotListenOptions: { includeMetadataChanges: true },
-    });
-    const [category_list, category_loading, category_error] = useCollection(
-        db.collection("users").doc(currentUser.uid).collection('categories')
-        ,
-        {
-            snapshotListenOptions: { includeMetadataChanges: true },
-    })
-    const [transaction_list, transaction_loading, transaction_error] = useCollection(
-        db.collection("users").doc(currentUser.uid).collection('transactions')
-        ,
-        {
-          snapshotListenOptions: { includeMetadataChanges: true },
-        }
-        );
-        console.log(transaction_loading)
     return (
         <>
         <FixedBar name="Dashboard">

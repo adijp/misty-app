@@ -117,7 +117,7 @@ export default function AddTransaction() {
         }
     );
     const [category_list, category_loading, category_error] = useCollection(
-        db.collection("users").doc(currentUser.uid).collection('categories')
+        db.collection("users").doc(currentUser.uid).collection('categories').where("active", "==",true)
         ,
         {
             snapshotListenOptions: { includeMetadataChanges: true },
@@ -169,9 +169,12 @@ export default function AddTransaction() {
         if (obj.date >= d) {
         docref.collection("categories").doc(obj.category).get().then((da) => {
             docref.collection("categories").doc(obj.category).set({
-            balance : da.data().balance + parseFloat(obj.amount), 
-            name : da.data().name, 
-            type : da.data().type
+                balance : da.data().balance + parseFloat(obj.amount), 
+                name : da.data().name, 
+                type : da.data().type, 
+                budget : da.data().budget, 
+                active : true,
+                id : da.data().name.toLowerCase()
             })
         })
         }

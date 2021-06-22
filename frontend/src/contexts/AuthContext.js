@@ -37,7 +37,9 @@ export function AuthProvider({ children }) {
           name : x[0], 
           balance : 0, 
           type : x[1], 
-          id : x[0].toLowerCase()
+          id : x[0].toLowerCase(), 
+          budget : 0, 
+          active : true
         }
         docref.collection("categories").doc(x[0].toLowerCase()).set(obj)
         var obj1 = {
@@ -92,7 +94,10 @@ export function AuthProvider({ children }) {
               docref.collection("categories").doc("unclassified").set({
                 balance : da.data().balance + parseFloat(x.amount), 
                 name : da.data().name, 
-                type : da.data().type
+                type : da.data().type, 
+                budget : da.data().budget, 
+                active : true, 
+                id : da.data().id
               })
             })
           }
@@ -147,7 +152,10 @@ export function AuthProvider({ children }) {
       var obj = {
         name : x[0], 
         balance : 0, 
-        type : x[1]
+        type : x[1], 
+        budget : 0, 
+        active : true, 
+        id : x[0].toLowerCase()
       }
       docref.collection("categories").doc(uuidv4()).set(obj)
     })

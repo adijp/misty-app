@@ -15,15 +15,16 @@ import { Link,useHistory } from "react-router-dom";
 import UpdateProfile from "./UpdateProfile.js"
 import {useAuth} from "../contexts/AuthContext"
 import Dashboard from "./Dashboard";
+import CategoryTable from './CategoryTable';
 export const mainListItems = (
   <>
-    <ListItem>
+    <ListItem button component={Link} to="/">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Dashboard"/>
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/category">
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>

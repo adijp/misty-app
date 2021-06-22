@@ -18,8 +18,9 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      refreshTransactions()
       history.push("/")
+      refreshTransactions()
+
     } catch {
       setError("Failed to log in")
     }

@@ -12,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import EditableTable from "./EditableTable";
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
@@ -60,14 +59,20 @@ export default function Transaction() {
           docref.collection("categories").doc(obj.category).set({
               balance : da.data().balance + parseFloat(obj.amount), 
               name : da.data().name, 
-              type : da.data().type
+              type : da.data().type, 
+              budget : da.data().budget, 
+              active : true, 
+              id : da.data().name.toLowerCase()
           })
         })
         docref.collection("categories").doc(rowdata.category).get().then((da) => {
           docref.collection("categories").doc(rowdata.category).set({
               balance : da.data().balance - parseFloat(obj.amount), 
               name : da.data().name, 
-              type : da.data().type
+              type : da.data().type,
+              budget : da.data().budget, 
+              active : true,
+              id : da.data().name.toLowerCase()
           })
         })
     }
@@ -81,7 +86,7 @@ export default function Transaction() {
     }
     );
     const [category_list, category_loading, category_error] = useCollection(
-      db.collection("users").doc(currentUser.uid).collection('categories')
+      db.collection("users").doc(currentUser.uid).collection('categories').where("active","==",true)
       ,
       {
           snapshotListenOptions: { includeMetadataChanges: true },

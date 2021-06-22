@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 import 'bootstrap/dist/css/bootstrap.css';
+import CategoryTable from "./CategoryTable.js";
 export default function App() {
   return (
     <Container
@@ -19,6 +20,7 @@ export default function App() {
     <AuthProvider>
       <Switch>
         <PrivateRoute exact path="/" component= {Dashboard} />
+        <PrivateRoute exact path="/category" component= {CategoryTable} />
         <div className="w-100" style={{maxWidth:"800" }}>
 
         <Route path="/signup" component= {Signup} />
