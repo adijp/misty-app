@@ -85,3 +85,16 @@ category
 
 Misty only shows the set of categories where ```active == True```. When a category is deleted, ```active``` is set to ```False```. 
 
+Each document in ```transactions``` has the following fields: 
+
+```
+transaction
+  account_id : string,
+  account_name : string, 
+  amount : float, 
+  category : string, 
+  currency : string, 
+  date : date, 
+  name : string, 
+  transaction_id : string
+```
