@@ -35,12 +35,12 @@ const useStyles = makeStyles({
         minWidth: 275,
     },
     leftpad : {
-        paddingLeft : 100
+        paddingLeft : 150
     }
   });
   var cardStyle = {
     height : 200, 
-    width : 20
+    width : 40
 
 }
 
@@ -48,57 +48,23 @@ export default function Dashboard() {
     const classes = useStyles();
     
     const {currentUser} = useAuth()
-    const [value, loading, perror] = useDocumentData(
-        db.collection("users").doc(currentUser.uid),
-        {
-          snapshotListenOptions: { includeMetadataChanges: true },
-        }
-      );
     
-    var flag = false;
-    var reflag = true;
-    var cardMessage = "Welcome to Misty!"
-    var subCardMessage = "Automatically add transactions to Misty by linking to your bank below."
-    var LinkMessage = "Connect to your bank"
-    if(value) {
-        if (value.tokens.length > 0) {
-            flag = true;
-            LinkMessage = "Add another bank"
-        } 
-    }
+    
+    
     return (
         <>
         <FixedBar name="Dashboard">
 
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <div className={classes.root + " " + classes.leftpad}>
-        <Grid container spacing={12}>
-            <Grid item xs={3}>
-                    <Card style = {cardStyle} className={classes.root + " " + "w-25"} variant="outlined">
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {cardMessage}
-                        </Typography>
-                        <Typography variant="h5" component="h2">
-                        {subCardMessage}
-                        </Typography>
-                        <PlaidLink description = {LinkMessage}></PlaidLink>
-                    </CardContent>
-                </Card> 
-            </Grid>
-            <br></br>
-            <Grid item xs = {6}>
-            <AddTransaction></AddTransaction>
-            </Grid>
-      </Grid>
-      
-      <Grid container spacing={12}>
-        <Transaction></Transaction>
-      </Grid>
-      </div>
         
-    <br></br>
-      <br></br>
+        <AddTransaction></AddTransaction>
+        <br></br>
+        <br></br>
+        <Grid container spacing={12}>
+          <Transaction></Transaction>
+        </Grid>
+        </div>
     </FixedBar>
         </>
     )

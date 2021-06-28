@@ -39,7 +39,6 @@ const Link = (props : messageDescription) => {
           return;
         }
         const data = await response.json();
-        console.log(data.access_token)
         dispatch({
           type: "SET_STATE",
           state: {

@@ -29,9 +29,7 @@ export default function Transaction() {
     const [val, setVal] = useState("");
 
   const handleAccount = (event, params) => {
-    console.log(params)
     setVal(event.target.value[1])
-    console.log(event.target.value)
     var rowdata = params.row;
     const obj = {
         name : rowdata.name, 
@@ -44,9 +42,8 @@ export default function Transaction() {
         transaction_id : rowdata.transaction_id, 
     };
     var category = obj.category;
-    console.log(obj)
     db.collection('users').doc(currentUser.uid).collection("transactions").doc(rowdata.transaction_id).set(obj).then(() => {
-      console.log("It worked")
+      console.log("")
   })
   .catch((error) => {
       console.error("Error writing document: ", error);
@@ -93,7 +90,7 @@ export default function Transaction() {
       })
       const columns = [
         { field: 'id', headerName: 'ID', width: 80, editable: false,headerAlign: 'center', },
-        { field: 'date', headerName: 'Date', width: 80, type: 'date', editable: true, headerAlign: 'center', },
+        { field: 'date', headerName: 'Date', width: 100, type: 'date', editable: true, headerAlign: 'center', },
         {
           field: 'name',
           headerName: 'Name',
@@ -106,7 +103,7 @@ export default function Transaction() {
           field: 'amount',
           headerName: 'Amount',
           type: 'number',
-          width: 80,
+          width: 100,
           headerAlign: 'center',
           editable: false
         },
@@ -164,7 +161,7 @@ export default function Transaction() {
         {loading && <span>Collection: Loading...</span>}
         {value && (
           <>
-          <div style={{ height: 800, width : 800 }}>
+          <div style={{ height: 800, width : 900 , fontSize : 20}}>
           <DataGrid autoPageSize pagination rowHeight={45} components={{
     Toolbar: CustomToolbar,
   }} rows={value.docs.map((doc, index) => (

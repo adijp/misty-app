@@ -96,14 +96,14 @@ export default function CategoryTable() {
         <br></br>
         <br></br>
         <br></br>
-        <Grid container spacing={1}>
+        <Grid container spacing={3} style = {{paddingLeft : 150}}>
         {category_list && category_list.docs.map(x => 
             
-            <Grid item xs={6} sm = {6} md = {3}>
+            <Grid item xs={8} sm = {6} md = {4}>
             <CategoryCard name = {x.data().name} id = {x.data().name.toLowerCase()} budget={x.data().budget} balance = {x.data().balance}type={x.data().type}></CategoryCard>
             </Grid>
         )}
-        <Grid item xs={6} sm = {6} md = {3}>
+        <Grid item xs={8} sm = {6} md = {4}>
             <AddCategory></AddCategory>
         </Grid>
         </Grid>

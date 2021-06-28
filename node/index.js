@@ -6,16 +6,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const moment = require('moment');
 
-const APP_PORT = process.env.APP_PORT || 8000;
+const APP_PORT = process.env.PORT || 8000;
 
 
-const PLAID_CLIENT_ID = "609b02c5107d160010ce5daf"//"609b02c5107d160010ce5daf";
+const PLAID_CLIENT_ID = ""
 
-const PLAID_SECRET = "b0138092a662e574acd2797be59fc3"; 
+const PLAID_SECRET = ""; 
 const PLAID_ENV = "sandbox";
 
-// const PLAID_SECRET = "f94458a69461f2014efbefb3c2d951";
-// const PLAID_ENV = "development"
+
 
 // PLAID_PRODUCTS is a comma-separated list of products to use when initializing
 // Link. Note that this list must contain 'assets' in order for the app to be
@@ -216,11 +215,9 @@ app.get('/api/auth', async function (request, response, next) {
 app.get('/api/get_trans'
 , async function (request, response, next) {
 
-    // console.log("works so far")
     const ret = client.getTransactions(accessToken, '2018-01-01', '2020-02-01', {})
   let transactions = ret.transactions;
   const total_transactions = ret.total_transactions;
-  // console.log(total_transactions)
 }
 )
 
@@ -230,7 +227,6 @@ app.get('/api/transactions/:atoken', async function (request, response, next) {
   // Pull transactions for the Item for the last 30 days
   const startDate = moment().subtract(600, 'days').format('YYYY-MM-DD');
   const endDate = moment().format('YYYY-MM-DD');
-  console.log("Token printing", request.params.atoken);
   const configs = {
     access_token: request.params.atoken,
     start_date: startDate,
@@ -242,7 +238,6 @@ app.get('/api/transactions/:atoken', async function (request, response, next) {
   };
   try {
     const transactionsResponse = await client.transactionsGet(configs);
-    console.log(transactionsResponse.data["total_transactions"])
     // prettyPrintResponse(transactionsResponse["total_transactions"]);
     response.json(transactionsResponse.data);
   } catch (error) {
@@ -255,7 +250,7 @@ app.get('/api/transactions/:atoken', async function (request, response, next) {
 
 
 const server = app.listen(APP_PORT, function () {
-  console.log('plaid-quickstart server listening on port ' + APP_PORT);
+  console.log('Misty server listening on port ' + APP_PORT);
 });
 
 const prettyPrintResponse = (response) => {

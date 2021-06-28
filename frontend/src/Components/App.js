@@ -10,6 +10,8 @@ import ForgotPassword from "./ForgotPassword"
 import UpdateProfile from "./UpdateProfile"
 import 'bootstrap/dist/css/bootstrap.css';
 import CategoryTable from "./CategoryTable.js";
+import './App.css';
+import Index from "./views/Index/Index.js"
 export default function App() {
   return (
     <Container
@@ -21,8 +23,9 @@ export default function App() {
       <Switch>
         <PrivateRoute exact path="/" component= {Dashboard} />
         <PrivateRoute exact path="/category" component= {CategoryTable} />
-        <div className="w-100" style={{maxWidth:"800" }}>
+        <Route path="/home" component={Index}/>
 
+        <div style={{width : 700 }}>
         <Route path="/signup" component= {Signup} />
         <Route path="/login" component= {Login} />
         <PrivateRoute exact path="/update-profile" component= {UpdateProfile} />

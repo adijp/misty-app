@@ -10,7 +10,6 @@ const AuthContext = React.createContext();
 export function useAuth() {
   return useContext(AuthContext);
 }
-
 export function AuthProvider({ children }) {
   const { linkToken, dispatch, accessToken } = useContext(Context);
 
@@ -104,7 +103,7 @@ export function AuthProvider({ children }) {
         }
         
       }).catch((error) => {
-        console.log("Error adding transaction", error);
+        console.log(error);
       })
       
     })
@@ -115,15 +114,6 @@ export function AuthProvider({ children }) {
     var UID = currentUser.uid;
     const docref = await db.collection('users').doc(UID).collection("transactions").get();
     return docref.docs.map(doc => doc.data());
-    // docref.get().then((doc) => {
-    //   if (doc.exists) {
-    //       return doc.data();
-    //   } else {
-    //       console.log("No such document!");
-    //   }
-    //   }).catch((error) => {
-    //       console.log("Error getting document:", error);
-    //   });
   }
 
   function addAccounts(data) {
@@ -159,12 +149,11 @@ export function AuthProvider({ children }) {
       }
       docref.collection("categories").doc(uuidv4()).set(obj)
     })
-    console.log("add categories was successful")
     
   }
 
   function getDataPerToken(token) {
-      fetch("http://localhost:3000/api/transactions" + "/" + token, {
+      fetch("https://localhost:3000/api/transactions" + "/" + token, {
           method: "GET", // or 'PUT'
       })
       .then((response) => response.json())
@@ -178,7 +167,6 @@ export function AuthProvider({ children }) {
     }
 
   function refreshTransactions() {
-    console.log("refreshing transactions")
     var UID = currentUser.uid;
     const token_list = db.collection('users').doc(UID).get().then((doc) => {
       if (doc.exists) {
@@ -217,7 +205,6 @@ export function AuthProvider({ children }) {
         accessToken: null,
       },
     });
-    console.log(accessToken)
     return auth.signOut();
   }
 

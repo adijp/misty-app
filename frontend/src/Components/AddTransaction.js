@@ -31,6 +31,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
 import { v4 as uuidv4 } from 'uuid';
+import AddCategory from './AddCategory'
 import {
     MuiPickersUtilsProvider,
     KeyboardTimePicker,
@@ -58,7 +59,8 @@ const useStyles = makeStyles({
     }
   });
   var cardStyle = {
-    height : 200
+    height : 200, 
+    width : 50
 }
 export default function AddTransaction() {
     const [error, setError] = useState("")
@@ -103,11 +105,7 @@ export default function AddTransaction() {
         setDate(date)
     }
     const handleCategory = (event) => {
-        console.log(account)
-        console.log(category)
         setCategory(event.target.value)
-        console.log(account)
-        console.log(category)
     }
     const [account_list, account_loading, account_error] = useCollection(
         db.collection("users").doc(currentUser.uid).collection('accounts')
@@ -122,6 +120,12 @@ export default function AddTransaction() {
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         })
+    const [value, loading_tran, perror] = useDocumentData(
+        db.collection("users").doc(currentUser.uid),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },
+        }
+        );
 
     function getAccountName(id) {
         var a = account_list.docs.map((doc,index) => {
@@ -163,7 +167,7 @@ export default function AddTransaction() {
             account_id : account, 
             transaction_id : tid, 
         };
-        console.log(obj);
+        
         docref.collection("transactions").doc(obj.transaction_id).set(obj)
         var d = new Date().getFullYear().toString() + '-'  + '0' + (new Date().getMonth() + 1).toString().slice(-2) + '-01' ;
         if (obj.date >= d) {
@@ -187,22 +191,61 @@ export default function AddTransaction() {
         setAccount("")
         setName("")
     }
+    var flag = false;
+    var reflag = true;
+    var cardMessage = "Welcome to Misty!"
+    var subCardMessage = "Automatically add transactions to Misty by linking to your bank below."
+    var LinkMessage = "Connect to your bank"
+    if(value) {
+        if (value.tokens.length > 0) {
+            flag = true;
+            LinkMessage = "Add another bank"
+        } 
+    }
     return (
         <>
-    <Card style = {cardStyle} className={classes.root + " " + "w-25"} variant="outlined">
-    <CardContent>
+        <Grid container spacing={1}>
+            <Grid item xs={6} sm = {6} md = {3}>
+                    <Card style = {cardStyle} className={classes.root + " " + "w-25"} variant="outlined">
+                    <CardContent>
+                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {cardMessage}
+                        </Typography>
+                        <Typography variant="h5" component="h2">
+                        {subCardMessage}
+                        </Typography>
+                        <PlaidLink description = {LinkMessage}></PlaidLink>
+                    </CardContent>
+                </Card> 
+            </Grid>
+            <Grid item xs={6} sm = {6} md = {3}>
+                    <AddCategory height="200"></AddCategory>
+            </Grid>
+            <Grid item xs={6} sm = {6} md = {3}>
+            
+                <Card style = {cardStyle} className={classes.root + " " + "w-25"} variant="outlined">
+                <CardContent>
 
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-        Add a transaction
-        </Typography>
-        <Typography variant="h5" component="h2">
-        Manually add a transaction and its details
-        </Typography>
-        <div>
-        <div className = {headerstyles.linkButton}> 
-        <ButtonTwo type="button" onClick={handleClickOpen} large>Add a transaction</ButtonTwo>
-        </div>
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    Add a transaction
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                    Manually add a transaction and its details
+                    </Typography>
+                    <div>
+                    <div className = {headerstyles.linkButton}> 
+                    <ButtonTwo type="button" onClick={handleClickOpen} large>Add a transaction</ButtonTwo>
+                    </div>
+                    
+                    </div>
+                    
+                    <br></br>
+                </CardContent>
+                </Card>
+            </Grid>
+
+        </Grid>
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Add a transaction</DialogTitle>
             {error && <Alert variant="danger">{error}</Alert>}
 
@@ -219,6 +262,7 @@ export default function AddTransaction() {
                 fullWidth
                 value = {name}
                 onChange = {handleName}
+                autocomplete="off"
             />
             <TextField
                 autoFocus
@@ -299,11 +343,6 @@ export default function AddTransaction() {
 
             </DialogActions>
         </Dialog>
-        </div>
-        
-        <br></br>
-    </CardContent>
-    </Card>
     </>
     )
 }

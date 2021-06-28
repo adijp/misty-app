@@ -22,25 +22,19 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard"/>
+      <ListItemText  primary="Dashboard"/>
     </ListItem>
     <ListItem button component={Link} to="/category">
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
-      <ListItemText primary="Categories" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Score" />
+      <ListItemText  primary="Categories" />
     </ListItem>
     <ListItem button component={Link} to="/update-profile">
       <ListItemIcon>
         <InfoIcon />
       </ListItemIcon>
-      <ListItemText primary="Update Info"/>
+      <ListItemText  primary="Update Info"/>
     </ListItem>
     
   </>

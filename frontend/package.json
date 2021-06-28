@@ -1,5 +1,5 @@
 {
-  "name": "plaid_react_quickstart",
+  "name": "MistyApp",
   "version": "0.1.0",
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
@@ -76,5 +76,5 @@
   "resolutions": {
     "fsevents": "2.2.0"
   },
-  "_id": "plaid_react_quickstart@0.1.0"
+  "_id": "misty_1.0"
 }

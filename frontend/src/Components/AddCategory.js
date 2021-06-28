@@ -57,11 +57,8 @@ const useStyles = makeStyles({
         paddingLeft : 100
     }
   });
-  var cardStyle = {
-    width : 300,
-    height : 440
-}
-export default function AddCategory() {
+  
+export default function AddCategory(props) {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const classes = useStyles();
@@ -70,14 +67,17 @@ export default function AddCategory() {
     const handleClickOpen = () => {
         setOpen(true);
     };
-
+    var cardStyle = {
+        width : 300,
+        height : props.height || 440
+    }
     const handleClose = () => {
         setOpen(false);
     };
 
     const [budget, setBudget] = useState('');
     const [name, setName] = useState('');
-    const [type, setType] = useState('Withdrawal');
+    const [type, setType] = useState('Spend');
     const handleBudget = (event) => {
         if (event.target.value < 0) {
             setBudget(0)
@@ -109,9 +109,7 @@ export default function AddCategory() {
         docref.collection("categories").doc(lname).get().then((doc) => {
             if (doc.exists) {
                 docref.collection("categories").doc(lname).get().then((doc) => {
-                    console.log(doc.data())
                     if (doc.data().active === false) {
-                        console.log("error")
                         const obj = {
                             balance : 0,
                             budget : budget, 
@@ -128,7 +126,6 @@ export default function AddCategory() {
                         setType("")
                         setBudget("")
                     } else {
-                        console.log("does not work")
                         setError("Category already exists")
                         setLoading(false)
                         return null;
@@ -186,6 +183,7 @@ export default function AddCategory() {
                 fullWidth
                 value = {name}
                 onChange = {handleName}
+                autocomplete="off"
             />
             <TextField
                 autoFocus
@@ -208,8 +206,8 @@ export default function AddCategory() {
             value={type}
             onChange = {handleType}
             >
-            <MenuItem value = "Withdrawal">Spend</MenuItem>
-            <MenuItem value="Deposit">Save</MenuItem>
+            <MenuItem value = "Spend">Spend</MenuItem>
+            <MenuItem value="Save">Save</MenuItem>
             </Select>
 
             </DialogContent>

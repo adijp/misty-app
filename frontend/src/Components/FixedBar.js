@@ -26,19 +26,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import { useHistory } from "react-router-dom";
 import {useAuth} from "../contexts/AuthContext"
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from './Copyright';
 
 const drawerWidth = 240;
 
@@ -98,7 +86,7 @@ export default function FixedBar(props) {
         setError('')
         try {   
             await logout()
-            history.push("/login")
+            history.push("/home")
         } catch {
             setError("Failed to log out")
         }

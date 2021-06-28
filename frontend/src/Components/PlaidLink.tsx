@@ -91,7 +91,6 @@ const PlaidLink = (props : messageDescription) => {
     if (accessToken !== null) {
       addToken(accessToken);
     }
-    console.log('Access token is', accessToken);
   },[accessToken])
   return (
     <div className={styles.App}>

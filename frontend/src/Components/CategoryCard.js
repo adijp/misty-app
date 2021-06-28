@@ -78,7 +78,6 @@ export default function CategoryCard(props) {
         .then((querySnapshot) => {
             querySnapshot.forEach((da) => {
                 if (da.data().category === lid){
-                    console.log(da.data())
                     const obj = {
                         name : da.data().name, 
                         amount : da.data().amount, 
@@ -89,11 +88,10 @@ export default function CategoryCard(props) {
                         account_id : da.data().account_id, 
                         transaction_id : da.data().transaction_id, 
                     };
-                    console.log(obj, da.data())
                     docref.collection('transactions').doc(obj.transaction_id).set(obj).then(() => {
                         console.log("updated transaction")
                     }).catch((error) => {
-                        console.log("Error updating document: ", error);
+                        console.log(error);
                     });
                     var d = new Date().getFullYear().toString() + '-'  + '0' + (new Date().getMonth() + 1).toString().slice(-2) + '-01' ;
                     if (obj.date >= d) {
@@ -113,7 +111,7 @@ export default function CategoryCard(props) {
             });  
         })
         .catch((error) => {
-            console.log("Error getting documents: ", error);
+            console.log(error);
         });
     }
     function getValue() {
@@ -128,12 +126,9 @@ export default function CategoryCard(props) {
     function getColor() {
         var color = ['#4caf50', '#66bb6a','#81c784','#fff176','#ffee58','#ffeb3b','#fdd835','#fbc02d','#f9a825','#f57f17','#ef6c00','#e65100']
         var index = Math.ceil((getData()+1)/10)-1;
-        console.log(props.name,"getcolor", index)
         if (props.type === "Spend") {
-            console.log(props.name,"getcolor", index, color[index])
             return color[index]
         } else {
-            console.log(props.name,"getcolor", index, color[10 - index])
             return color[10 - index]
         }
     }
@@ -151,7 +146,6 @@ export default function CategoryCard(props) {
         } else {
             a = Math.min(100, Math.ceil(props.balance / props.budget * 100))
         }
-        console.log(props.name, a)
         return a
     }
     function getChartText() {
