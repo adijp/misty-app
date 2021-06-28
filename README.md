@@ -51,6 +51,8 @@ $ npm install
 $ npm start
 ```
 
+## Document Schema
+
 Each user's data is a document in Firestore. Each user's document is made up of three collections :
 - `accounts`
 - `categories`
