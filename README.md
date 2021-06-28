@@ -32,3 +32,40 @@ Misty requires API keys from both [Plaid](https://www.plaid.com) and [Google Fir
 ### Firebase API keys setup
 - Open `frontend/firebase.js`.
 - Update the `config` variable with Firebase credentials.
+
+## 3. Running the app
+
+### Running the backend
+
+```
+$ cd node
+$ npm install
+$ node index.js
+```
+
+### Running the frontend
+
+```
+$ cd frontend
+$ npm install
+$ npm start
+```
+
+Each user's data is a document in Firestore. Each user's document is made up of three collections :
+- `accounts`
+- `categories`
+- `transactions`
+
+If a user grants access to a bank account, an `access_token` is authorized and sent from Plaid to Misty. Misty stores each of the `access_token` in a field called `tokens`. Every time a user logs in, Misty uses the `access_token` to check if there are any new transactions with accounts associated with the tokens.
+
+`accounts` has two documents, `cash` and `other` by default. If a user connects to their bank account using Plaid, each of their accounts is added as an additional document. Each account has the following fields:
+```
+account
+  account_id : string,
+  currency : string,
+  current_balance : string,
+  name : string,
+  official_name : string,
+  subtype : string,
+  type : string
+```
