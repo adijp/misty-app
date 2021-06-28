@@ -71,3 +71,17 @@ account
   subtype : string,
   type : string
 ```
+
+`categories` has 9 default categories. All transactions are by default categorized as `unclassified`. Users will have to manually designate a category to a transaction. Each category has the following fields: 
+```
+category
+  active : bool, 
+  balance : float, 
+  budget : float, 
+  id : string, 
+  name : string, 
+  type : "Spend" or "Save"
+```
+
+Misty only shows the set of categories where ```active == True```. When a category is deleted, ```active``` is set to ```False```. 
+
