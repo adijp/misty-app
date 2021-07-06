@@ -102,5 +102,5 @@ transaction
 ## Try the test environment
 
 ### Step 1: Sign up at [misty-test.herokuapp.com/signup](https://misty-test.herokuapp.com/signup) 
-<img src="images/img1.png" width="200" height = "300>
+<img src="/images/img1.png" width="200" height = "300>
 ![Sign up step](/images/img1.png)
