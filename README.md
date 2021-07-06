@@ -2,7 +2,7 @@
 
 misty-app
 
-This repository contains all the code for Misty, a personal finance app which helps users budget smarter. Here is a link to Misty - [misty-prod.herokuapp.com/](https://misty-prod.herokuapp.com/).
+This repository contains all the code for Misty, a personal finance app which helps users budget smarter. Here is a link to Misty - [misty-test.herokuapp.com/](https://misty-test.herokuapp.com/).
 
 Misty uses [Plaid](https://www.plaid.com) to securely connect to bank accounts in US and Canada. Misty relies on [Google Firebase](https://firebase.google.com/) for the backend. In particular, Misty uses Firebase Authentication for handling user auth and Firestore as a document database.
 
@@ -98,3 +98,7 @@ transaction
   name : string, 
   transaction_id : string
 ```
+
+# Try the test environment
+
+
