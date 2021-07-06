@@ -101,4 +101,6 @@ transaction
 
 ## Try the test environment
 
+### Step 1: Sign up at [misty-test.herokuapp.com/signup](https://misty-test.herokuapp.com/signup) 
 
+![Sign up step](/images/img1.png)
