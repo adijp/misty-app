@@ -104,22 +104,22 @@ transaction
 ### Step 1: Sign up at [misty-test.herokuapp.com/signup](https://misty-test.herokuapp.com/signup) 
 ![Sign up step](/images/img1.png)
 
-## Step 2: Click the ```Connect to your bank``` button. 
+### Step 2: Click the ```Connect to your bank``` button. 
 ![Connect to your bank](/images/img2.png)
 
-## Step 3: Click ```Continue```. 
+### Step 3: Click ```Continue```. 
 ![Click Continue](/images/img3.png)
 
-## Step 4: Select any bank. 
+### Step 4: Select any bank. 
 ![Select bank](/images/img4.png)
 
-## Step 5: Enter ```user_good``` and ```pass_good``` as credentials. 
+### Step 5: Enter ```user_good``` and ```pass_good``` as credentials. 
 ![Enter credentials](/images/img5.png)
 
-## Step 6: Select at least one account. 
+### Step 6: Select at least one account. 
 ![Select account](/images/img6.png)
 
-## Step 7: Voilá. 
+### Step 7: Voilá. 
 ![Final page](/images/img7.png)
 
 
